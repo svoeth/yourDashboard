@@ -42,6 +42,7 @@ class DashletOtrsQueue extends Dashlet
 		$queue = $this->parameter->getValueArray("queue");
 		$ticketStates = $this->parameter->getValueArray("ticketState");
 		$ticketLock = $this->parameter->getValueArray("ticketLock");
+		$service = $this->parameter->getValueArray("ticketService");
 		$maxEntries = $this->parameter->getValue("maxEntries");
 		$linkUrlBase = $this->parameter->getValue("linkUrlBase");
 		$createAlarms = $this->parameter->getValue("createAlarms");
@@ -74,11 +75,17 @@ class DashletOtrsQueue extends Dashlet
 		$connector = new ConnectorOtrs($soapUrl, $soapUser, $soapPassword);
 
 		//get ticketIDs
-		$tickets = $connector->getTickets($queue, $ticketStates, $ticketLock, $maxEntries + 1);
+		$tickets = $connector->getTickets($queue, $ticketStates, $ticketLock, $maxEntries + 1, $service);
 
 		//start output
 		$output = "<h1 class=\"text-center\">$title</h1>";
 		$output .= "<table class=\"dashboard-severity\">";
+		$output .= "<tr class=\"dashboard-nowrap\">";
+		$output .= "<td>Ticketnummer</td>";
+                $output .= "<td>Betreff</td>";
+                $output .= "<td>Service</td>";
+                $output .= "<td>Alter</td>";
+                $output .= "</tr>";
 
 		//output of ticket summary
 		$i = 0;
@@ -97,9 +104,10 @@ class DashletOtrsQueue extends Dashlet
 			}
 
 			
-			$output .= "<tr class=\"dashboard-severity-warning\">";
+			$output .= "<tr class=\"dashboard-severity-info\">";
 			$output .= "<td class=\"dashboard-nowrap\"><a href=\"$linkUrlBase/index.pl?Action=AgentTicketZoom;TicketID={$ticket['TicketID']}\" target=\"_blank\">{$ticket['TicketNumber']}</a></td>";
 			$output .= "<td>{$ticket['Title']}</td>";
+                        $output .= "<td>{$ticket['Service']}</td>";
 			$output .= "<td class=\"dashboard-nowrap\">(".$this->getAgeString($ticket['Age']).")</td>";
 			$output .= "</tr>";
 			$i++;

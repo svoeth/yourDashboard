@@ -61,7 +61,7 @@ class ConnectorOtrs
 	* @param $limit max count of output entries
 	* @return array with ticketIDs
 	*/
-	public function getTickets($queues, $states, $lock, $limit)
+	public function getTickets($queues, $states, $lock, $limit, $services)
 	{
 		//soap call to get all new or open tickets of queue $queue
 		$soapClient = new SoapClient(null, $this->soapOptions);
@@ -78,6 +78,10 @@ class ConnectorOtrs
 		{
 			$soapMessage[] = new SoapParam($state, "States");
 		}
+		foreach($services as $service)
+                {
+                        $soapMessage[] = new SoapParam($service, "Services");
+                }
 		$soapMessage[] = new SoapParam($lock, "Locks");
 		$soapMessage[] = new SoapParam("Down", "OrderBy");
 		$soapMessage[] = new SoapParam("Age", "SortBy");
@@ -107,6 +111,7 @@ class ConnectorOtrs
 		$soapMessage[] = new SoapParam($this->soapUser, "UserLogin");
 		$soapMessage[] = new SoapParam($this->soapPassword, "Password");
 		$soapMessage[] = new SoapParam($ticketId, "TicketID");
+
 		$ticket = $soapClient->__soapCall("TicketGet", $soapMessage);
 
 		//generate output array
@@ -114,7 +119,9 @@ class ConnectorOtrs
 		$output['TicketNumber'] = $ticket->TicketNumber;
 		$output['Title'] = $ticket->Title;
 		$output['TicketID'] = $ticket->TicketID;
+		$output['Queue'] = $ticket->Queue;
 		$output['Age'] = $ticket->Age;
+		$output['Service'] = $ticket->Service;
 		return $output;
 	}
 }
