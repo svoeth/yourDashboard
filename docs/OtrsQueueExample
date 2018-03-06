@@ -1,0 +1,59 @@
+This is an example for the dsahlet OtrsQueue
+
+
+
+The following example shows all tickets in queues "Eingang" and "Raw" that are in the state "new" 
+
+<dashlet class="DashletOtrsQueue" refresh="30000">
+      <parameter key="title" value="OTRS Tickets in Eingang" />
+      <parameter key="soapUrl" value="http://10.0.1.106/otrs/nph-genericinterface.pl/WebserviceID/1" />
+      <parameter key="soapUser" value="yourdashboard" />
+      <parameter key="soapPassword" value="yourdashboard" />
+      <parameter key="queue" value="Eingang" />
+      <parameter key="queue" value="Raw" />
+      <parameter key="ticketState" value="new" />
+      <parameter key="linkUrlBase" value="http://10.0.1.106/otrs" />
+      <parameter key="maxEntries" value="10" />
+</dashlet>
+
+
+The following example shows all tickets in all queues that have the service "Mail" and are in the state "new"
+
+<dashlet class="DashletOtrsQueue" refresh="30000">
+      <parameter key="title" value="OTRS Tickets in Eingang" />
+      <parameter key="soapUrl" value="http://10.0.1.106/otrs/nph-genericinterface.pl/WebserviceID/1" />
+      <parameter key="soapUser" value="yourdashboard" />
+      <parameter key="soapPassword" value="yourdashboard" />
+      <parameter key="ticketService" value="Mail" />
+      <parameter key="ticketState" value="new" />
+      <parameter key="linkUrlBase" value="http://10.0.1.106/otrs" />
+      <parameter key="maxEntries" value="10" />
+</dashlet>
+
+
+The following example shows all new and open tickets in queue "Eingang"
+
+<dashlet class="DashletOtrsQueue" refresh="30000">
+      <parameter key="title" value="OTRS Tickets in Eingang" />
+      <parameter key="soapUrl" value="http://10.0.1.106/otrs/nph-genericinterface.pl/WebserviceID/1" />
+      <parameter key="soapUser" value="yourdashboard" />
+      <parameter key="soapPassword" value="yourdashboard" />
+      <parameter key="queue" value="Eingang" />
+      <parameter key="linkUrlBase" value="http://10.0.1.106/otrs" />
+      <parameter key="maxEntries" value="10" />
+</dashlet>
+
+
+The following example shows all locked and open tickets in queue "Eingang"
+
+<dashlet class="DashletOtrsQueue" refresh="30000">
+      <parameter key="title" value="OTRS Tickets in Eingang" />
+      <parameter key="soapUrl" value="http://10.0.1.106/otrs/nph-genericinterface.pl/WebserviceID/1" />
+      <parameter key="soapUser" value="yourdashboard" />
+      <parameter key="soapPassword" value="yourdashboard" />
+      <parameter key="queue" value="Eingang" />
+      <parameter key="ticketLock" value="0" />
+      <parameter key="ticketState" value="open" />
+      <parameter key="linkUrlBase" value="http://10.0.1.106/otrs" />
+      <parameter key="maxEntries" value="10" />
+</dashlet>
