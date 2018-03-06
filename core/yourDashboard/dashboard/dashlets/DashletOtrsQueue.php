@@ -80,7 +80,7 @@ class DashletOtrsQueue extends Dashlet
 		//start output
 		$output = "<h1 class=\"text-center\">$title</h1>";
 		$output .= "<table class=\"dashboard-severity\">";
-		$output .= "<tr class=\"dashboard-nowrap\">";
+		$output .= "<tr class=\"dashboard-severity-header\">";
 		$output .= "<td>Ticketnummer</td>";
                 $output .= "<td>Betreff</td>";
                 $output .= "<td>Service</td>";
@@ -104,7 +104,7 @@ class DashletOtrsQueue extends Dashlet
 			}
 
 			
-			$output .= "<tr class=\"dashboard-severity-info\">";
+			$output .= "<tr class=\"dashboard-severity-mail\">";
 			$output .= "<td class=\"dashboard-nowrap\"><a href=\"$linkUrlBase/index.pl?Action=AgentTicketZoom;TicketID={$ticket['TicketID']}\" target=\"_blank\">{$ticket['TicketNumber']}</a></td>";
 			$output .= "<td>{$ticket['Title']}</td>";
                         $output .= "<td>{$ticket['Service']}</td>";
